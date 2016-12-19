@@ -6,8 +6,11 @@ using UnityEngine.UI;
 using MundiPagg;
 using MundiPagg.MundiPaggClientModels;
 
-public class LoginManager : MonoBehaviour
+public class LoginManager : Screen
 {
+    [SerializeField]
+    private string nextScreenId;
+
     [SerializeField]
     private InputField usernameField, passwordField;
     
@@ -24,12 +27,14 @@ public class LoginManager : MonoBehaviour
         MundiPaggClientAPI.Login(request,
             result =>
             {
-                Debug.Log(result.Username);
-                Debug.Log(result.CustomerKey);
+                usernameField.text = string.Empty;
+                passwordField.text = string.Empty;
+
+                ScreenManager.instance.ChangeScreen(nextScreenId);
             },
             error =>
             {
-                Debug.Log(error.ToString());
+                
             }
         );
     }

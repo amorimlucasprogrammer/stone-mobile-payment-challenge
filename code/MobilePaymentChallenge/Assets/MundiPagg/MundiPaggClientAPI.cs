@@ -20,23 +20,50 @@ namespace MundiPagg
             {
                 ApiEndPoint = "/users/accesstokens",
                 Verb = MundiPaggHTTP.Request.VERB.POST,
+                Data = request,
                 Header = new Dictionary<string, string>()
                 {
                     { "Content-Type", "application/json" }
-                },
-                Data = request
+                }
             };
             MundiPaggHTTP.MakePortalApiCall(loginRequest, resultCallback, errorCallback);
         }
 
-        public static void GetMerchants()
+        public static void GetMerchants(GetMerchantsRequest request, Action<GetMerchantsResult> resultCallback, Action<MundiPaggError> errorCallback)
         {
-            //MundiPaggHTTP.MakePortalApiCall();
+            MundiPaggHTTP.Request searchMerchantsRequest = new MundiPaggHTTP.Request()
+            {
+                ApiEndPoint = "/" + request.CustomerKey + "/merchants",
+                Verb = MundiPaggHTTP.Request.VERB.GET,
+                Data = request,
+                Header = new Dictionary<string, string>()
+                {
+                    { "Authorization", MundiPaggSession.CurrentSession.TokenType + " " + MundiPaggSession.CurrentSession.AccessToken }
+                    , { "Content-Type", "application/x-www-form-urlencoded" }
+                    , { "IsSandboxEnabled", "true" }
+                }
+            };
+            MundiPaggHTTP.MakePortalApiCall(searchMerchantsRequest, resultCallback, errorCallback);
         }
 
-        public static void Sale()
+        public static void Sale(SaleRequest request, Action<SaleResult> resultCallback, Action<MundiPaggError> errorCallback)
         {
-           // MundiPaggHTTP.MakePortalApiCall();
+            Debug.Log(request.MerchantKey);
+            MundiPaggHTTP.Request saleRequest = new MundiPaggHTTP.Request()
+            {
+                ApiEndPoint = "/Sale",
+                Verb = MundiPaggHTTP.Request.VERB.POST,
+                Data = request,
+                Header = new Dictionary<string, string>()
+                {
+                    { "MerchantKey", request.MerchantKey }
+                    ,{ "Content-Type", "application/json" }
+                    , { "Accept", "application/json" }
+                    , { "IsSandboxEnabled", "true" }
+                    
+                }
+            };
+            MundiPaggHTTP.MakeSandboxApiCall(saleRequest, resultCallback, errorCallback);
         }
     }
 }

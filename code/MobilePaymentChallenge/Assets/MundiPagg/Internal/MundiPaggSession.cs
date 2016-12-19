@@ -7,6 +7,10 @@ namespace MundiPagg.Internal
     public class MundiPaggSession
     {
         public static Session CurrentSession;
+        public static void Logout()
+        {
+            CurrentSession = null;
+        }
 
         [System.Serializable]
         public class Session
