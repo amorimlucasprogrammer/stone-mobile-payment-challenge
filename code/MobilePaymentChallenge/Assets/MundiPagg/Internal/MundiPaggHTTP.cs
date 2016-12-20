@@ -79,8 +79,7 @@ namespace MundiPagg.Internal
                 OnRequestStart.Invoke();
 
             yield return www;
-            Debug.Log(www.error);
-            Debug.Log(www.text);
+
             //No error?
             if (string.IsNullOrEmpty(www.error))
             {

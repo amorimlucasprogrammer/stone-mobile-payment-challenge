@@ -48,7 +48,6 @@ namespace MundiPagg
 
         public static void Sale(SaleRequest request, Action<SaleResult> resultCallback, Action<MundiPaggError> errorCallback)
         {
-            Debug.Log(request.MerchantKey);
             MundiPaggHTTP.Request saleRequest = new MundiPaggHTTP.Request()
             {
                 ApiEndPoint = "/Sale",
