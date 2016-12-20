@@ -115,8 +115,14 @@ public class MerchantsManager : Screen
                     result =>
                     {
                         salePopup.Close();
+
                         float transactionCost = creditCardTransaction.AmountInCents / 100f;
-                        MessagePopup.Open("Sucesso", string.Format("Compra de R$ {0:0.00} efetuada com sucesso!", transactionCost));
+                        CreditCardTransactionResult transactionResult = result.CreditCardTransactionResultCollection[0];
+
+                        if (transactionResult.Success)
+                            MessagePopup.Open("Sucesso", string.Format("Compra de R$ {0:0.00} efetuada com sucesso!", transactionCost));
+                        else
+                            MessagePopup.Open("Erro", transactionResult.AcquirerMessage);
                     },
                     error =>
                     {

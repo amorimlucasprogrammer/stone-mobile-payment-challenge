@@ -88,9 +88,14 @@ namespace MundiPagg.MundiPaggClientModels
     [Serializable]
     public class SaleResult : MundiPaggResultCommon
     {
-
+        public CreditCardTransactionResult[] CreditCardTransactionResultCollection;
     }
-    
+
+    public class CreditCardTransactionResult
+    {
+        public string AcquirerMessage;
+        public bool Success;
+    }
     public class CreditCardTransaction
     {
         public int AmountInCents;

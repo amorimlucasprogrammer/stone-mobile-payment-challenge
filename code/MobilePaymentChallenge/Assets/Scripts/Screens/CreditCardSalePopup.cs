@@ -21,27 +21,30 @@ public class CreditCardSalePopup : MonoBehaviour
 
     public void SaleClick()
     {
-        int costInCents = Mathf.RoundToInt( float.Parse(costField.text) * 100 );
+        float cost = 0;
+        float.TryParse(costField.text, out cost);
+        int costInCents = Mathf.RoundToInt(cost * 100);
 
         CreditCard creditCard = new CreditCard()
         {
             HolderName = cardNameField.text,
             CreditCardBrand = brandField.text,
-            CreditCardNumber = cardNumberField.text,
-            SecurityCode = int.Parse(securityCodeField.text),
-            ExpMonth = int.Parse(expMonthField.text),
-            ExpYear = int.Parse(expYearField.text)
+            CreditCardNumber = cardNumberField.text.Replace("-", ""),
         };
+        int.TryParse(securityCodeField.text, out creditCard.SecurityCode);
+        int.TryParse(expMonthField.text, out creditCard.ExpMonth);
+        int.TryParse(expYearField.text, out creditCard.ExpYear);
+
         CreditCardTransaction transaction = new CreditCardTransaction()
         {
             AmountInCents = costInCents,
             CreditCard = creditCard
         };
-        
+
         if (OnSaleClick != null)
             OnSaleClick(transaction);
     }
-    
+
     public void Open()
     {
         popupObject.SetActive(true);
