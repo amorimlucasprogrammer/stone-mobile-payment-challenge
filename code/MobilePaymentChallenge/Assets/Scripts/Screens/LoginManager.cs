@@ -13,7 +13,10 @@ public class LoginManager : Screen
 
     [SerializeField]
     private InputField usernameField, passwordField;
-    
+
+    [SerializeField]
+    private ErrorPopup errorPopup;
+
     public void StartLogin()
     {
         string username = usernameField.text;
@@ -34,7 +37,7 @@ public class LoginManager : Screen
             },
             error =>
             {
-                
+                errorPopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
             }
         );
     }

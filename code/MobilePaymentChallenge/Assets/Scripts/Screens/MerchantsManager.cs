@@ -25,6 +25,9 @@ public class MerchantsManager : Screen
     private GetMerchantsResult merchantsResult;
     private Merchant currentMerchant;
 
+    [SerializeField]
+    private ErrorPopup errorPopup;
+
     void Start()
     {
         GetMerchantsPageAndFill(1);
@@ -54,7 +57,7 @@ public class MerchantsManager : Screen
             },
             error =>
             {
-
+                errorPopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
             }
         );
     }
@@ -115,6 +118,7 @@ public class MerchantsManager : Screen
                     },
                     error =>
                     {
+                        errorPopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
                     }
                 );
             };

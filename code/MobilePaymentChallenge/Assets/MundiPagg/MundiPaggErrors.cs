@@ -23,6 +23,9 @@ namespace MundiPagg
 
         public string GetErrorMessage()
         {
+            if (Errors == null)
+                return string.Empty;
+
             string message = string.Empty;
             for(int i = 0; i < Errors.Length; i++)
             {
