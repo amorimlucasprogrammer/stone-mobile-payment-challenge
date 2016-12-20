@@ -9,6 +9,9 @@ using MundiPagg.MundiPaggClientModels;
 public class CreditCardSalePopup : MonoBehaviour
 {
     [SerializeField]
+    private GameObject popupObject;
+
+    [SerializeField]
     private InputField nameField, emailField, brandField, cardNumberField, cardNameField, securityCodeField, expMonthField, expYearField;
 
     [SerializeField]
@@ -37,5 +40,14 @@ public class CreditCardSalePopup : MonoBehaviour
         
         if (OnSaleClick != null)
             OnSaleClick(transaction);
+    }
+    
+    public void Open()
+    {
+        popupObject.SetActive(true);
+    }
+    public void Close()
+    {
+        popupObject.SetActive(false);
     }
 }

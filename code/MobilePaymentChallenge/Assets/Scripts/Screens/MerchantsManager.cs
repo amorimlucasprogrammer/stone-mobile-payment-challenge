@@ -26,7 +26,7 @@ public class MerchantsManager : Screen
     private Merchant currentMerchant;
 
     [SerializeField]
-    private ErrorPopup errorPopup;
+    private MessagePopup errorPopup;
 
     void Start()
     {
@@ -57,7 +57,7 @@ public class MerchantsManager : Screen
             },
             error =>
             {
-                errorPopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
+                MessagePopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
             }
         );
     }
@@ -102,7 +102,7 @@ public class MerchantsManager : Screen
     
     private void OpenAndSetupSalePopup()
     {
-        salePopup.gameObject.SetActive(true);
+        salePopup.Open();
         salePopup.OnSaleClick =
             creditCardTransaction =>
             {
@@ -114,11 +114,13 @@ public class MerchantsManager : Screen
                 MundiPaggClientAPI.Sale(request,
                     result =>
                     {
-
+                        salePopup.Close();
+                        float transactionCost = creditCardTransaction.AmountInCents / 100f;
+                        MessagePopup.Open("Sucesso", string.Format("Compra de R$ {0:0.00} efetuada com sucesso!", transactionCost));
                     },
                     error =>
                     {
-                        errorPopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
+                        MessagePopup.Open(error.ErrorCode.ToString(), error.GetErrorMessage());
                     }
                 );
             };

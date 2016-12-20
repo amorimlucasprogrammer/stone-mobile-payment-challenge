@@ -83,8 +83,8 @@
     <Compile Include="Assets\MundiPagg\MundiPaggClientAPI.cs" />
     <Compile Include="Assets\MundiPagg\MundiPaggClientModels.cs" />
     <Compile Include="Assets\MundiPagg\MundiPaggErrors.cs" />
-    <Compile Include="Assets\Scripts\ErrorPopup.cs" />
     <Compile Include="Assets\Scripts\Loading.cs" />
+    <Compile Include="Assets\Scripts\MessagePopup.cs" />
     <Compile Include="Assets\Scripts\Screens\CreditCardSalePopup.cs" />
     <Compile Include="Assets\Scripts\Screens\LoginManager.cs" />
     <Compile Include="Assets\Scripts\Screens\MerchantElement.cs" />

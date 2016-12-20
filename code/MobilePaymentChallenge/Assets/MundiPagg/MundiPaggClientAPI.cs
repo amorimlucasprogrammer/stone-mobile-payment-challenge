@@ -50,7 +50,7 @@ namespace MundiPagg
         {
             MundiPaggHTTP.Request saleRequest = new MundiPaggHTTP.Request()
             {
-                ApiEndPoint = "/Sale",
+                ApiEndPoint = "/Sale/",
                 Verb = MundiPaggHTTP.Request.VERB.POST,
                 Data = request,
                 Header = new Dictionary<string, string>()

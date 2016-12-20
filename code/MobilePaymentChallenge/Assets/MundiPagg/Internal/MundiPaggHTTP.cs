@@ -47,7 +47,6 @@ namespace MundiPagg.Internal
             instance.RequestsHistory.Add(requestContainer);
             instance.StartCoroutine(instance.StartRequest(requestContainer));
         }
-
         private IEnumerator StartRequest(RequestContainer requestContainer)
         {
             byte[] postData = null;
